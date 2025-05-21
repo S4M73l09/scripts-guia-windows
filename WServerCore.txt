@@ -1,0 +1,126 @@
+Descargar Microsoft Admin Center > Conectar a Windows Server Core mediante la IP
+Configurar el Active Directory desde la pantalla de administracion de microsoft Admin Center
+
+#
+# Script de Windows PowerShell para implementación de AD DS
+#
+
+Import-Module ADDSDeployment
+Install-ADDSForest `
+-CreateDnsDelegation:$false `
+-DatabasePath "C:\Windows\NTDS" `
+-DomainMode "WinThreshold" `
+-DomainName "coremigue.local" `
+-DomainNetbiosName "COREMIGUE" `
+-ForestMode "WinThreshold" `
+-InstallDns:$true `
+-LogPath "C:\Windows\NTDS" `
+-NoRebootOnCompletion:$false `
+-SysvolPath "C:\Windows\SYSVOL" `
+-Force:$true
+
+El script de arriba sirve para crear un Dominio de Active Directory a través de la Powershell
+
+En ajustes (esquina sup. izq) instalamos la extension de Active Directory, despues podemos crear unidades organizativas desde
+el Microsoft Admin Center
+
+Crear RAID 5 [Desde la powershell del Windows Admin Center]
+
+
+Debemos usar el comando de Powershell específico para que el script funcione en 
+todos los equipos, ya que en algunos no hay alias
+[Recuerda usar el comando natiov]
+
+Get-Alias cd 	--> Te dice cual es el comando de Powershell para el alias cd
+
+GetFolderPath --> Devuelve el path de un directorio básico
+
+El salto de Línea en Powershell se usa con `n
+
+
+RSAT --> Remote Server Administration Tool
+Uso de las mmc (Microsoft Management Console)
+Debemos tener el PC cliente dentro del dominio y administrarlo directamente
+dentro del cliente.
+
+
+[POWERSHELL]
+net user invitado /active:no	--> Desactiva el usuario
+net user <username> <password> /add /fullname:"Miguel Molina" /comment:"Alumno digitechfp" /times:l-v,13:00-18:00
+
+New-LocalUser nombre -Password <password>
+
+Direcitva de seguridad local --> en Windows Server por defecto las contraseñas duran 42 días, aquí podemos
+establecer longitud mínima de contraseña, y un historial de contraseñas para que no se repita cuando deba
+cambiarla.
+
+Get-Alias -Definition Get-ChildItem		--> Te dice cuales son los alias de un comando nativo
+Get-Alias -Name %
+
+gc --> Get-Content		Obtiene los datos dentro de un archivo
+
+
+
+[	Ejercicios Powershell		]
+Ordenar los archivos por extension en diferentes carpetas
+Con un CSV, usar un for each desde powershell para crear los usuarios y añadirlos a un Windows Server
+
+En los equipos de Windows por defecto tienen el ExecutionPolicy de los scripts en restricted
+Set-ExecutionPolicy -Unrestricted
+
+Se pueden ver todas las configuraciones para un usuario usando el comando net-user $username,
+incluyendo el horario de inicio de sesión disponible
+
+
+PowerShell -- Redes
+Get-NetAdapter -IncludeHidden	(lista todos los adaptadores de red)(Como si abrieses el administrador de dispositivos)
+Get-NetAdapter -InterfaceIndex 8 | Select-Object -Property name,linkspeed,status
+
+Se puede redireccionar el texto para que lo saque en forma de matriz excel con | Out-GridView
+
+Disable-NetAdapter -Name Ethernet -Confirm:$false
+
+La opcion -Confirm:$false evita que salga un recuadro preguntando al usuario si está seguro de realizar
+los cambios
+
+gip --> Get-NetIPConfiguration
+
+Get-NetIPInterface
+Get-DNSClientServerAddress
+
+Get-NetRoute
+
+
+
+---------------------------------------------------------------------------------------------
+
+Set-Sconfig -Autolaunch $false
+Rename-Computer -NewName DC01-MigueCore
+Get-NetIPInterface
+Set-NetIPInterface -InterfaceIndex 5 -Dhcp disabled
+
+Remove-NetIPAddress -InterfaceIndex 5 -Confirm:$false
+New-NetIPAddress -InterfaceIndex 5 -IPAddress 10.0.3.127 -PrefixLength 24 -DefaultGateway 10.0.3.1
+
+Set-DnsClientServerAddress -InterfaceIndex 5 -ServerAddresses 1.1.1.1,8.8.8.8
+
+Test-Netconnection -TraceRoute www.google.com
+Set-Service wuauserv -StartupType Automatic
+
+Install-WindowsFeature ad-domain-services,dns
+Import-Module ADDSDeployment
+
+Install-ADDSForest -CreateDNSDelegation:$false -DomainName "asomig.local" -DomainNetbiosName "ASOMIG" -ForestMode Winthreshold -DomainMode WinThreshold -DatabasePath "C:\Windows\NTDS" -Logpath "C:\Windows\NTDS" -SysvolPath "C:\Windows\SYSVOL" -InstallDns:$false -NoRebootOnCompletion:$false -Force:$true
+
+Sconfig
+
+Cuando el servidor pasa a ser controlador de domino, los grupos y usuarios del equipo local desaparecen, hay que configurarlos a través de usuarios y equipos de AD
+----------------------
+Share
+----------------------
+
+New-Item -ItemType Directory -Path C:\ -Name Scripts
+New-SmbShare -FullAccess Administrador -Path "C:\Scripts\" -Name Scripts -Description "Carpeta para Scripts"
+
+Si no puedes ejecutar un script probablemente sea por la politica de ejecución, prueba
+Set-ExecutionPolicy unrestricted
