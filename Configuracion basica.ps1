@@ -1,14 +1,14 @@
 ﻿#Crearemos la configuracion basica del ordenador.
 #Nombrar el equipo
-$pc="dcsajesu"
+$pc="Nombretuyo"
 
 #Configurar Direcciones IP
-$diripexterna = "10.0.3.45"
-$diripinterna = "192.168.99.1"
+$diripexterna = "x.x.x.x"
+$diripinterna = "x.x.x.x"
 #nombre adaptadores de red
 $redint = "Ethernet 2"
 $redext= "Ethernet"
-$gateway= "10.0.3.1"
+$gateway= "x.x.x.x"
 $DNS= "8.8.8.8,8.8.4.4"
 Rename-computer -NewName $pc
 Get-NetAdapter -Name $redint | Remove-NetIPAddress -confirm:$false
@@ -18,4 +18,5 @@ Get-NetAdapter -Name $redext | New-NetIPAddress -AddressFamily IPv4 -IPAddress $
 
 Rename-NetAdapter -Name $redint -NewName "INTERNO"
 Rename-NetAdapter -Name $redext -NewName "EXTERNO"
+
 Restart-Computer -Force
