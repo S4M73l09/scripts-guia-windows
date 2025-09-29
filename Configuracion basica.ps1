@@ -1,11 +1,11 @@
-﻿#Crearemos la configuracion basica del ordenador.
-#Nombrar el equipo
+﻿#Crearemos la configuracion basica del ordenador / We create the basic configure of PC
+#Nombrar el equipo / Name the PC
 $pc="Nombretuyo"
 
-#Configurar Direcciones IP
+#Configurar Direcciones IP / Configure IP
 $diripexterna = "x.x.x.x"
 $diripinterna = "x.x.x.x"
-#nombre adaptadores de red
+#nombre adaptadores de red / Name of red adapters
 $redint = "Ethernet 2"
 $redext= "Ethernet"
 $gateway= "x.x.x.x"
@@ -20,3 +20,4 @@ Rename-NetAdapter -Name $redint -NewName "INTERNO"
 Rename-NetAdapter -Name $redext -NewName "EXTERNO"
 
 Restart-Computer -Force
+
