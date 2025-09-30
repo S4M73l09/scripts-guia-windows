@@ -1,0 +1,125 @@
+This file shows how to connect and manage Windows Server Core using RSAT / Windows Admin Center.
+
+Download Microsoft Admin Center → Connect to Windows Server Core by its IP
+Configure Active Directory from the Microsoft Admin Center administration screen
+
+#
+# Windows PowerShell script for AD DS deployment
+#
+
+Import-Module ADDSDeployment
+Install-ADDSForest `
+-CreateDnsDelegation:$false `
+-DatabasePath "C:\Windows\NTDS" `
+-DomainMode "WinThreshold" `
+-DomainName "coremigue.local" `
+-DomainNetbiosName "COREMIGUE" `
+-ForestMode "WinThreshold" `
+-InstallDns:$true `
+-LogPath "C:\Windows\NTDS" `
+-NoRebootOnCompletion:$false `
+-SysvolPath "C:\Windows\SYSVOL" `
+-Force:$true
+
+The script above creates an Active Directory domain through PowerShell.
+
+In Settings (top-left), install the **Active Directory** extension. Then you can create Organizational Units from Microsoft Admin Center.
+
+Create RAID 5 [from the Windows Admin Center PowerShell]
+
+We must use the specific (native) PowerShell command so the script works on every machine,
+because some environments do not have the same aliases.
+[Remember to use the native command]
+
+Get-Alias cd     → tells you which PowerShell command is behind the alias cd
+
+GetFolderPath    → returns the path to a basic directory
+
+Newline in PowerShell strings uses: `n
+
+
+RSAT → Remote Server Administration Tools
+Using MMC (Microsoft Management Console)
+The client PC must be joined to the domain and administered directly from that client.
+
+
+[ POWERSHELL ]
+net user invitado /active:no      → Disables the user
+net user <username> <password> /add /fullname:"Miguel Molina" /comment:"Alumno digitechfp" /times:l-v,13:00-18:00
+
+New-LocalUser nombre -Password <password>
+
+Local Security Policy → in Windows Server, passwords expire after 42 days by default. Here you can set a minimum password length and a password history so the user cannot reuse old passwords when forced to change them.
+
+Get-Alias -Definition Get-ChildItem    → shows which aliases map to a native command
+Get-Alias -Name %
+
+gc → Get-Content      Retrieves the contents of a file
+
+
+
+[   PowerShell exercises   ]
+• Sort files by extension into different folders.
+• Using a CSV, run a foreach in PowerShell to create users and add them to a Windows Server.
+
+On Windows machines, the default script ExecutionPolicy is Restricted.
+Set-ExecutionPolicy -Unrestricted
+
+You can see all configuration for a user with the command net user $username,
+including the allowed logon schedule.
+
+
+PowerShell — Networking
+Get-NetAdapter -IncludeHidden       (lists all network adapters; like Device Manager)
+Get-NetAdapter -InterfaceIndex 8 | Select-Object -Property name,linkspeed,status
+
+You can pipe the output to a grid view (matrix-like) with: | Out-GridView
+
+Disable-NetAdapter -Name Ethernet -Confirm:$false
+
+The -Confirm:$false option prevents the confirmation prompt from appearing.
+
+gip → Get-NetIPConfiguration
+
+Get-NetIPInterface
+Get-DnsClientServerAddress
+
+Get-NetRoute
+
+
+
+---------------------------------------------------------------------------------------------
+
+Set-Sconfig -Autolaunch $false
+Rename-Computer -NewName DC01-MigueCore
+Get-NetIPInterface
+Set-NetIPInterface -InterfaceIndex 5 -Dhcp disabled
+
+Remove-NetIPAddress -InterfaceIndex 5 -Confirm:$false
+New-NetIPAddress -InterfaceIndex 5 -IPAddress 10.0.3.127 -PrefixLength 24 -DefaultGateway 10.0.3.1
+
+Set-DnsClientServerAddress -InterfaceIndex 5 -ServerAddresses 1.1.1.1,8.8.8.8
+
+Test-NetConnection -TraceRoute www.google.com
+Set-Service wuauserv -StartupType Automatic
+
+Install-WindowsFeature ad-domain-services,dns
+Import-Module ADDSDeployment
+
+Install-ADDSForest -CreateDNSDelegation:$false -DomainName "asomig.local" -DomainNetbiosName "ASOMIG" -ForestMode Winthreshold -DomainMode WinThreshold -DatabasePath "C:\Windows\NTDS" -Logpath "C:\Windows\NTDS" -SysvolPath "C:\Windows\SYSVOL" -InstallDns:$false -NoRebootOnCompletion:$false -Force:$true
+
+Sconfig
+
+When the server becomes a domain controller, the local machine’s users and groups disappear;
+you must configure them through Active Directory Users and Computers (ADUC).
+
+----------------------
+Share
+----------------------
+
+New-Item -ItemType Directory -Path C:\ -Name Scripts
+New-SmbShare -FullAccess Administrador -Path "C:\Scripts\" -Name Scripts -Description "Carpeta para Scripts"
+
+If you cannot run a script it is probably due to the execution policy. Try:
+
+Set-ExecutionPolicy Unrestricted
