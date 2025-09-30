@@ -17,3 +17,5 @@ El orden necesario para montar bien dicho Dominio es, este:
 
 
  [📦 Descargar todos los scripts (.zip)](https://github.com/S4M73l09/scripts-guia-windows/archive/refs/tags/v1.0.0.zip)
+
+ [🐧 Descargar todos los scripts (.tar)](https://github.com/S4M73l09/scripts-guia-windows/archive/refs/tags/v1.0.0.tar)
