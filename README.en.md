@@ -16,7 +16,7 @@ The order necessary to set up said Domain well is this:
   **4.** [configuracionNAT.ps1](Scripts/configuracionNAT.ps1)
 
 and if you want to install RSAT on a Windows client connected to the domain, 
-this file gives us a perfect explanation about everything necessary and serves as a tutorial. [Here!!!!](.txt%20 explicativo-.Explanatory/WserverRSAT-EN.txt)
+this file gives us a perfect explanation about everything necessary and serves as a tutorial. [Here!!!!](.txt%20explicativo-.Explanatory/WserverRSAT-EN.txt)
 
 [📦Download all files as .zip](https://github.com/S4M73l09/scripts-guia-windows/archive/refs/tags/v1.0.0.zip)
 
