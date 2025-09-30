@@ -7,16 +7,16 @@ Each Script can be modified according to the user's preferences and is free to u
 
 The order necessary to set up said Domain well is this:
 
-  **1.** [Configuracion basica.ps1](Configuracion%20basica.ps1)
+  **1.** [Configuracion basica.ps1](Scripts/Configuracion%20basica.ps1)
 
-  **2.** [creaDominio.ps1](creaDominio.ps1)
+  **2.** [creaDominio.ps1](Scripts/creaDominio.ps1)
 
-  **3.** [Configuracion DHCP y ambito.ps1](Configuracion%20DHCP%20y%20ambito.ps1)
+  **3.** [Configuracion DHCP y ambito.ps1](Scripts/Configuracion%20DHCP%20y%20ambito.ps1)
 
-  **4.** [configuracionNAT.ps1](configuracionNAT.ps1)
+  **4.** [configuracionNAT.ps1](Scripts/configuracionNAT.ps1)
 
 and if you want to install RSAT on a Windows client connected to the domain, 
-this file gives us a perfect explanation about everything necessary and serves as a tutorial. [Here!!!!](WServerRSAT-EN.txt)
+this file gives us a perfect explanation about everything necessary and serves as a tutorial. [Here!!!!](.txt%20 explicativo-.Explanatory/WserverRSAT-EN.txt)
 
 [📦Download all files as .zip](https://github.com/S4M73l09/scripts-guia-windows/archive/refs/tags/v1.0.0.zip)
 
