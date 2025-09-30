@@ -1,0 +1,23 @@
+# Scripts-Windows EN --> [ES](README.md)
+
+### Windows Server script storage
+
+Scripts are stored in this repository that can be used to configure a Windows Server Core only by interface.  
+Each Script can be modified according to the user's preferences and is free to use ^^.
+
+The order necessary to set up said Domain well is this:
+
+  **1.** [Configuracion basica.ps1](Configuracion%20basica.ps1)
+
+  **2.** [creaDominio.ps1](creaDominio.ps1)
+
+  **3.** [Configuracion DHCP y ambito.ps1](Configuracion%20DHCP%20y%20ambito.ps1)
+
+  **4.** [configuracionNAT.ps1](configuracionNAT.ps1)
+
+and if you want to install RSAT on a Windows client connected to the domain, 
+this file gives us a perfect explanation about everything necessary and serves as a tutorial. [Here!!!!](WServerCore.txt)
+
+[📦Download all files as .zip](https://github.com/S4M73l09/scripts-guia-windows/archive/refs/tags/v1.0.0.zip)
+
+[🐧Download all files as .tar.gz](https://github.com/S4M73l09/scripts-guia-windows/archive/refs/tags/v1.0.0.tar.gz)
