@@ -1,3 +1,5 @@
+En este fichero se mostrara el como conectar dicho
+
 Descargar Microsoft Admin Center > Conectar a Windows Server Core mediante la IP
 Configurar el Active Directory desde la pantalla de administracion de microsoft Admin Center
 
@@ -123,4 +125,5 @@ New-Item -ItemType Directory -Path C:\ -Name Scripts
 New-SmbShare -FullAccess Administrador -Path "C:\Scripts\" -Name Scripts -Description "Carpeta para Scripts"
 
 Si no puedes ejecutar un script probablemente sea por la politica de ejecución, prueba
+
 Set-ExecutionPolicy unrestricted
