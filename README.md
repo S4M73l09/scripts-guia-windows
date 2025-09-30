@@ -16,4 +16,4 @@ El orden necesario para montar bien dicho Dominio es, este:
   y si quieres instalar unas RSAT en un windows cliente conectado al dominio, este archivo nos da una explicacion perfecta acerca de todo lo necesario y que sirve como tutorial. [Pincha aqui!!!!](WServerCore.txt)
 
 
- [📦 Descargar todos los scripts (.zip)](https://github.com/S4M73l09/scripts-guia-windows/releases/tag/v1.0.0.zip)
+ [📦 Descargar todos los scripts (.zip)](https://github.com/S4M73l09/scripts-guia-windows/archive/refs/tags/v1.0.0.zip)
