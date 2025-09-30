@@ -18,6 +18,6 @@ The order necessary to set up said Domain well is this:
 and if you want to install RSAT on a Windows client connected to the domain, 
 this file gives us a perfect explanation about everything necessary and serves as a tutorial. [Here!!!!](.txt%20explicativo-.Explanatory/WServerRSAT-EN.txt)
 
-[📦Download all files as .zip](https://github.com/S4M73l09/scripts-guia-windows/archive/refs/tags/v1.0.0.zip)
+[📦Download all files as .zip](https://github.com/S4M73l09/scripts-guia-windows/archive/refs/tags/v1.0.1.zip)
 
-[🐧Download all files as .tar.gz](https://github.com/S4M73l09/scripts-guia-windows/archive/refs/tags/v1.0.0.tar.gz)
+[🐧Download all files as .tar.gz](https://github.com/S4M73l09/scripts-guia-windows/archive/refs/tags/v1.0.1.tar.gz)
